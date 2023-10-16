@@ -5,5 +5,6 @@ abstract class AppColors{
   static const Color accent = Color(0xff242424);
   static const Color transparent = Colors.transparent;
   static const Color white = Colors.white;
-
+  static const Color primiarydark = Color(0xff141A2E);
+  static const Color accentdark = Color(0xffFACC1D);
 }

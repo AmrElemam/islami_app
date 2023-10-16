@@ -1,49 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/details_screen_args.dart';
+import 'package:islami_app/provider/settings_provider.dart';
+import 'package:provider/provider.dart';
+
 import '../utils/app_assets.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_theme.dart';
 
 class DetailsScreen extends StatefulWidget {
   static const String routename = "detailscreen";
 
+  const DetailsScreen({super.key});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  late  DetailsScreenArgs arguments;
-
+  late DetailsScreenArgs arguments;
+  late SettingsProvider provider;
   String filecontent = "";
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     arguments = ModalRoute.of(context)!.settings.arguments as DetailsScreenArgs;
-    if(filecontent.isEmpty) readfile();
+    if (filecontent.isEmpty) readfile();
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(AppAssets.icBackground),
-                fit: BoxFit.fill)
-        ),
-        child:  Scaffold(
-          appBar: AppBar(
-            title:  Text(arguments.SuraOrHadethName,style: AppTheme.appbartitlestyle,),
-            centerTitle: true,
-            backgroundColor: AppColors.transparent,
-            elevation: 0,
-          ),
-          backgroundColor: AppColors.transparent,
-          body: filecontent.isEmpty? const Center(child: CircularProgressIndicator()):
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-                child: Text(
-                  filecontent,textDirection: TextDirection.rtl,textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppColors.accent,fontSize: 24),)),
-          ),
-        )
+                image: AssetImage(provider.isdarkmode()
+                    ? AppAssets.icDarkBackground
+                    : AppAssets.icBackground),
+                fit: BoxFit.fill)),
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(arguments.SuraOrHadethName),
+            ),
+            body: filecontent.isEmpty? const Center(child: CircularProgressIndicator()):
+            Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SingleChildScrollView(
+                      child: Text(
+                        filecontent,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ))
     );
   }
 
