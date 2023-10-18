@@ -1,5 +1,5 @@
-abstract class AppAssets{
-static const String basepathassets = "assets/images/";
+abstract class AppAssets {
+  static const String basepathassets = "assets/images/";
   static const String icQuran = "${basepathassets}quran_tab_logo.png";
   static const String icSebha = "${basepathassets}sebha_tab_logo.png";
   static const String icAhadeth = "${basepathassets}ahadeth_tab_logo.png";
@@ -8,4 +8,5 @@ static const String basepathassets = "assets/images/";
   static const String icTabAhadeth = "${basepathassets}ahadeth_logo.png";
   static const String icBackground = "${basepathassets}background.png";
   static const String icDarkBackground = "${basepathassets}dark_background.png";
+  static const String splash = "${basepathassets}splash.png";
 }
